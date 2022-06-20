@@ -67,16 +67,13 @@ export default function MovieDialog({ open, handleClose, currentMovie }: IProps)
           <CardMedia
             component="img"
             height="194"
-            image="https://images.unsplash.com/photo-1655686078954-d454e45ced15?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2970&q=80"
+            image={`${currentMovie?.images['Poster Art'].url}`}
             alt={`${currentMovie?.title}`}
           />
           <Typography gutterBottom>{currentMovie?.description}</Typography>
-          <Typography gutterBottom>{`Release Year: ${currentMovie?.releaseYear}`}</Typography>
         </DialogContent>
         <DialogActions>
-          {/* <Button autoFocus onClick={handleClose}>
-            Close
-          </Button> */}
+          <Typography gutterBottom>{`Release Year: ${currentMovie?.releaseYear}`}</Typography>
         </DialogActions>
       </BootstrapDialog>
     </div>

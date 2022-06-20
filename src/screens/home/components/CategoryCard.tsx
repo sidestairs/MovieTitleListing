@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 const ImageButton = styled(ButtonBase)(({ theme }) => ({
   position: 'relative',
   height: 200,
-  width: 400,
+  width: 280,
   opacity: 0.5,
   backgroundColor: theme.palette.common.black,
   transition: theme.transitions.create('opacity'),
@@ -46,13 +46,14 @@ const CategoryCard = ({ category }: { category: String }) => {
           <Image>
             <Typography
               component="span"
-              variant="h3"
+              variant="h5"
               color="inherit"
               sx={{
                 position: 'relative',
                 p: 4,
                 pt: 2,
                 pb: (theme) => `calc(${theme.spacing(1)} + 6px)`,
+                textTransform: 'uppercase',
               }}
             >
               {category}
