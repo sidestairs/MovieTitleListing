@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Button from '@mui/material/Button';
+import CardMediaExtended from 'shared/CardMediaExtended';
 import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
@@ -63,18 +63,23 @@ export default function MovieDialog({ open, handleClose, currentMovie }: IProps)
         <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
           {currentMovie?.title}
         </BootstrapDialogTitle>
-        <DialogContent dividers>
-          <CardMedia
-            component="img"
-            height="194"
-            image={`${currentMovie?.images['Poster Art'].url}`}
-            alt={`${currentMovie?.title}`}
-          />
-          <Typography gutterBottom>{currentMovie?.description}</Typography>
-        </DialogContent>
-        <DialogActions>
-          <Typography gutterBottom>{`Release Year: ${currentMovie?.releaseYear}`}</Typography>
-        </DialogActions>
+        {currentMovie && (
+          <>
+            <DialogContent dividers>
+              <CardMediaExtended
+                {...currentMovie.images['Poster Art']}
+                title={`${currentMovie?.title}`}
+                mediaHeight={200}
+              />
+              <Typography gutterBottom my={2}>
+                {currentMovie?.description}
+              </Typography>
+            </DialogContent>
+            <DialogActions>
+              <Typography gutterBottom mx={2} my={1}>{`Release Year: ${currentMovie?.releaseYear}`}</Typography>
+            </DialogActions>
+          </>
+        )}
       </BootstrapDialog>
     </div>
   );

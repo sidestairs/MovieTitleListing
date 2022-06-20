@@ -11,7 +11,7 @@ interface IProps {
   mediaHeight: Number;
 }
 
-const MovieImage = ({ url, width, height, title, mediaHeight = 200 }: IProps) => {
+const CardMediaExtended = ({ url, width, height, title, mediaHeight = 200 }: IProps) => {
   const [hasImageLoaded, setHasImageLoaded] = useState(false);
 
   const handleImageError = (e: any) => {
@@ -38,4 +38,4 @@ const MovieImage = ({ url, width, height, title, mediaHeight = 200 }: IProps) =>
   );
 };
 
-export default MovieImage;
+export default CardMediaExtended;

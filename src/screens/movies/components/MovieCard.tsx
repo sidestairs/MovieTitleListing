@@ -3,7 +3,7 @@ import Card from '@mui/material/Card';
 
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import MovieImage from './MovieImage';
+import CardMediaExtended from 'shared/CardMediaExtended';
 
 import { MovieObject } from 'redux/slices/movieListSlice';
 
@@ -14,7 +14,7 @@ interface IProps extends MovieObject {
 const MovieCard = ({ title, description, images, programType, releaseYear, onClick }: IProps) => {
   return (
     <Card sx={{ height: 300, width: 180, cursor: 'pointer' }} onClick={onClick}>
-      <MovieImage {...images['Poster Art']} title={title} mediaHeight={200} />
+      <CardMediaExtended {...images['Poster Art']} title={title} mediaHeight={200} />
       <CardContent>
         <Typography
           variant="h6"
