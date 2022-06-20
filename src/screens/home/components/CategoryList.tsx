@@ -1,38 +1,23 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import CategoryCard from './CategoryCard';
 import Grid from '@mui/material/Grid';
-import { useAppSelector, useAppDispatch } from 'redux/hook';
-import { selectMovieCategories, selectStatus, fetchMovieListAsync, setMovieList } from 'redux/slices/movieListSlice';
+import { useAppSelector } from 'redux/hook';
+import { selectMovieCategories } from 'redux/slices/movieListSlice';
 
-export default function MovieList() {
-  const dispatch = useAppDispatch();
+export default function CategoryList() {
   const movieCategories = useAppSelector(selectMovieCategories);
-  const status = useAppSelector(selectStatus);
-
-  useEffect(() => {
-    const entries = dispatch(fetchMovieListAsync()).unwrap();
-    entries.then((response) => {
-      dispatch(setMovieList(response.entries));
-    });
-  }, []);
 
   return (
     <React.Fragment>
-      {status === 'loading' ? (
-        <>loading</>
-      ) : (
-        <>
-          <Grid container spacing={2}>
-            {movieCategories.map((category, index) => {
-              return (
-                <Grid item xl>
-                  <CategoryCard key={index} category={category} />
-                </Grid>
-              );
-            })}
-          </Grid>
-        </>
-      )}
+      <Grid container spacing={2}>
+        {movieCategories.map((category, index) => {
+          return (
+            <Grid key={index} item xl>
+              <CategoryCard category={category} />
+            </Grid>
+          );
+        })}
+      </Grid>
     </React.Fragment>
   );
 }

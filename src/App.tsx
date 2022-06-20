@@ -2,11 +2,7 @@ import React from 'react';
 import NavigationRoute from './navigations';
 
 function App() {
-  return (
-    <React.Fragment>
-      <NavigationRoute />
-    </React.Fragment>
-  );
+  return <NavigationRoute />;
 }
 
 export default App;

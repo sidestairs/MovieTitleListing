@@ -4,33 +4,52 @@ import Grid from '@mui/material/Grid';
 import { useAppSelector, useAppDispatch } from 'redux/hook';
 import { selectMovieByCategory } from 'redux/slices/movieListSlice';
 import { MovieObject } from 'redux/slices/movieListSlice';
-
+import MovieDialog from './MovieDialog';
+import Button from '@mui/material/Button';
 import { useParams } from 'react-router-dom';
 
-export default function MovieList() {
+const MovieList = () => {
   const { category } = useParams();
-  const [movieList, setMovieList] = useState<MovieObject[]>();
+  const [movieListing, setMovieListing] = useState<MovieObject[]>();
+  const [currentMovie, setCurrentMovie] = useState<MovieObject>();
+  const [openMovieDialog, setOpenMovieDialog] = React.useState(false);
   const movieByCategory = useAppSelector(selectMovieByCategory);
   const dispatch = useAppDispatch();
 
   console.log('category', category);
 
   useEffect(() => {
-    setMovieList(movieByCategory(category));
+    const movies = movieByCategory(category);
+    setMovieListing(movies);
   }, [category]);
+
+  const handleMovieDialogClose = () => {
+    setOpenMovieDialog(false);
+  };
+
+  const handleMovieDialogOpen = (entry: MovieObject) => {
+    setCurrentMovie(entry);
+    setOpenMovieDialog(true);
+  };
 
   return (
     <React.Fragment>
+      <MovieDialog open={openMovieDialog} handleClose={handleMovieDialogClose} currentMovie={currentMovie} />
       <Grid container spacing={2}>
-        {movieList &&
-          movieList.map((entry, index) => {
+        {movieListing &&
+          movieListing.map((entry, index) => {
             return (
-              <Grid item xl>
-                <MovieCard key={index} {...entry} />
+              <Grid key={index} item xl>
+                <Button variant="outlined" onClick={() => handleMovieDialogOpen(entry)}>
+                  Open dialog
+                </Button>
+                <MovieCard {...entry} />
               </Grid>
             );
           })}
       </Grid>
     </React.Fragment>
   );
-}
+};
+
+export default MovieList;
