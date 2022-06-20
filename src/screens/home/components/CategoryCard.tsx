@@ -41,7 +41,6 @@ const CategoryCard = ({ category }: { category: String }) => {
   return (
     <Box sx={{ display: 'flex', flexWrap: 'wrap', minWidth: 300, width: '100%' }}>
       <ImageButton>
-        {/* <ImageBackdrop className="MuiImageBackdrop-root" /> */}
         <Link to={`/${category}`}>
           <Image>
             <Typography

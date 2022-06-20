@@ -1,10 +1,12 @@
-import React from 'react';
-import MovieList from './components/MovieList';
+import React, { Suspense } from 'react';
+import Loading from 'shared/Loading';
+
+const MovieList = React.lazy(() => import('./components/MovieList'));
 
 export default function Home() {
   return (
-    <React.Fragment>
+    <Suspense fallback={<Loading />}>
       <MovieList />
-    </React.Fragment>
+    </Suspense>
   );
 }

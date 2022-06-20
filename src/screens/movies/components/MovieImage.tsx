@@ -1,11 +1,22 @@
-import * as React from 'react';
+import React from 'react';
+import CardMedia from '@mui/material/CardMedia';
 
-const MovieImage = ({ url, width, height }: { url: String; width: Number; height: Number }) => {
+const MovieImage = ({
+  url,
+  width,
+  height,
+  title,
+  mediaHeight = 200,
+}: {
+  url: String;
+  width: Number;
+  height: Number;
+  title: String;
+  mediaHeight: Number;
+}) => {
   return (
     <React.Fragment>
-      {/* {images['Poster Art'].url && (
-        <CardMedia component="img" height="194" image={images['Poster Art'].url} alt="asd" />
-      )} */}
+      <CardMedia component="img" height={`${mediaHeight}`} image={`${url}`} alt={`${title}`} />
     </React.Fragment>
   );
 };

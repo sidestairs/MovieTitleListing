@@ -7,7 +7,7 @@ import Box from '@mui/material/Box';
 const App = () => {
   return (
     <Container maxWidth="lg">
-      <Box sx={{ bgcolor: '#EEEEEE', height: '100vh' }}>
+      <Box sx={{ bgcolor: '#EEEEEE', minHeight: '100vh' }}>
         <ResponsiveAppBar />
         <Box
           sx={{

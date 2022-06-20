@@ -40,10 +40,7 @@ const MovieList = () => {
           movieListing.map((entry, index) => {
             return (
               <Grid key={index} item xl>
-                <Button variant="outlined" onClick={() => handleMovieDialogOpen(entry)}>
-                  Open dialog
-                </Button>
-                <MovieCard {...entry} />
+                <MovieCard {...entry} onClick={() => handleMovieDialogOpen(entry)} />
               </Grid>
             );
           })}

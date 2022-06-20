@@ -1,28 +1,34 @@
 import * as React from 'react';
-import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
+
 import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
-import Collapse from '@mui/material/Collapse';
-import Avatar from '@mui/material/Avatar';
-import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import { red } from '@mui/material/colors';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+import MovieImage from './MovieImage';
+
 import { MovieObject } from 'redux/slices/movieListSlice';
 
-const MovieCard = ({ title, description, images, programType, releaseYear }: MovieObject) => {
+interface IProps extends MovieObject {
+  onClick: () => void;
+}
+
+const MovieCard = ({ title, description, images, programType, releaseYear, onClick }: IProps) => {
   return (
-    <Card sx={{ maxWidth: 345 }}>
-      <CardHeader title={title} />
+    <Card sx={{ height: 300, width: 180, cursor: 'pointer' }} onClick={onClick}>
+      <MovieImage {...images['Poster Art']} title={title} mediaHeight={200} />
       <CardContent>
-        <Typography variant="body2" color="text.secondary">
-          {description}
+        <Typography
+          variant="h6"
+          color="text.secondary"
+          sx={{
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+          }}
+        >
+          {`${title}`}
+        </Typography>
+        <Typography variant="subtitle2" color="text.secondary">
+          {`${releaseYear}`}
         </Typography>
       </CardContent>
     </Card>

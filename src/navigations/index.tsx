@@ -9,8 +9,6 @@ export default function NavigationRoute() {
   const status = useAppSelector(selectStatus);
   const allMovieEntries = useAppSelector(selectAllMovieEntries);
 
-  console.log('status', status);
-
   useEffect(() => {
     const entries = dispatch(fetchMovieListAsync()).unwrap();
     entries.then((response) => {
