@@ -1,0 +1,30 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "search.exclude": {
+      "**/.git": true,
+      "**/node_modules": true,
+      "**/tmp": true
+    },
+    "files.associations": {
+      "jsconfig.json": "json"
+    },
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "files.exclude": {
+      "**/.git": true,
+      "**/.svn": true,
+      "**/.hg": true,
+      "**/CVS": true,
+      "**/.DS_Store": true,
+      "**/node_modules": true
+    },
+    "workbench.colorCustomizations": {
+      "gitDecoration.ignoredResourceForeground": "#444444"
+    }
+  }
+}
