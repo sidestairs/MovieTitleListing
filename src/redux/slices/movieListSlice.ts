@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, createSelector, PayloadAction } from '@reduxjs/toolkit';
 import { RootState, AppThunk } from 'redux/store';
 import { fetchCount, fetchMovieList } from './movieListAPI';
 
@@ -81,7 +81,23 @@ export const { setMovieList, increment, decrement, incrementByAmount } = movieLi
 // Selectors
 export const selectCount = (state: RootState) => state.movieList.value;
 export const selectStatus = (state: RootState) => state.movieList.status;
-export const selectMovieEntries = (state: RootState) => state.movieList.entries;
+export const selectAllMovieEntries = (state: RootState) => state.movieList.entries;
+
+// export const selectMovieCategories = (state: RootState) => {
+//   const unique = Array.from(new Set(state.movieList.entries.map((item) => item.programType)));
+//   return unique;
+// };
+export const selectMovieCategories = createSelector(selectAllMovieEntries, (allMovieEntires) => {
+  const unique = Array.from(new Set(allMovieEntires.map((item) => item.programType)));
+  return unique;
+});
+
+// SELECTS MOVIE VIA PROGRAM TYPE
+export const selectMovieByCategory = createSelector(selectAllMovieEntries, (allMovieEntires) => {
+  return function callbackFunction(category: String | undefined) {
+    return allMovieEntires.filter((item) => item.programType === category);
+  };
+});
 
 // Reducers
 export default movieListSlice.reducer;

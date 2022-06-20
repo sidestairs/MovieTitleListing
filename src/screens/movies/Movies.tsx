@@ -1,10 +1,10 @@
 import React from 'react';
-import CategoryList from './components/CategoryList';
+import MovieList from './components/MovieList';
 
 export default function Home() {
   return (
     <React.Fragment>
-      <CategoryList />
+      <MovieList />
     </React.Fragment>
   );
 }
