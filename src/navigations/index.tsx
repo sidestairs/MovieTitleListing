@@ -2,7 +2,13 @@ import React, { useEffect } from 'react';
 import MainRoute from 'navigations/MainRoute';
 import Loading from 'shared/Loading';
 import { useAppSelector, useAppDispatch } from 'redux/hook';
-import { selectStatus, fetchMovieListAsync, setMovieList, selectAllMovieEntries } from 'redux/slices/movieListSlice';
+import {
+  selectStatus,
+  fetchMovieListAsync,
+  selectAllMovieEntries,
+  setMovieList,
+  setTotalCount,
+} from 'redux/slices/movieListSlice';
 
 export default function NavigationRoute() {
   const dispatch = useAppDispatch();
@@ -13,6 +19,7 @@ export default function NavigationRoute() {
     const entries = dispatch(fetchMovieListAsync()).unwrap();
     entries.then((response) => {
       dispatch(setMovieList(response.entries));
+      dispatch(setTotalCount(response.total));
     });
   }, []);
 
