@@ -10,6 +10,7 @@ interface IFunFacts {
 export const funFactsApi = createApi({
   reducerPath: 'funFactsApi',
   baseQuery: fetchBaseQuery({ baseUrl: 'http://numbersapi.com/' }),
+  keepUnusedDataFor: 30,
   endpoints: (builder) => ({
     getFunFactsById: builder.query<IFunFacts, String>({
       query: (id) => `${id}?json`,

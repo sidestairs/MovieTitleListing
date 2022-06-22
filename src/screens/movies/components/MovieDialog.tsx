@@ -63,18 +63,12 @@ interface IProps {
 
 export default function MovieDialog({ open, handleClose, currentMovie }: IProps) {
   const funfacts = currentMovie?.funFacts;
+  const skip = !!funfacts;
   const funfactsIndex = currentMovie?.funfactsIndex ?? '';
-  // let data: String | undefined;
-  // let error: Boolean | undefined;
-  // let isLoading: Boolean | undefined;
 
-  const { data, error, isLoading } = useGetFunFactsByIdQuery(funfactsIndex);
-
-  // useEffect(() => {}, [isLoading]);
-
-  // console.log('funfacts', funfacts);
-  // if (!funfacts) {
-  // }
+  const { data, error, isLoading } = useGetFunFactsByIdQuery(funfactsIndex, {
+    skip,
+  });
 
   return (
     <div>
