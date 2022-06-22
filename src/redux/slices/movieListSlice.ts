@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, createSelector, PayloadAction } from '@reduxjs/toolkit';
-import { RootState, AppThunk } from 'redux/store';
-import { fetchCount, fetchMovieList } from './movieListAPI';
+import { RootState } from 'redux/store';
+import { fetchMovieList } from './movieListAPI';
 
 export interface MovieObject {
   title: String;
@@ -14,6 +14,7 @@ export interface MovieObject {
     };
   };
   releaseYear: Number;
+  funFacts?: String;
 }
 
 export interface MovieListState {
@@ -29,6 +30,11 @@ const initialState: MovieListState = {
 };
 
 export const fetchMovieListAsync = createAsyncThunk('movieList/fetchMovieList', async () => {
+  const response = await fetchMovieList();
+  return response;
+});
+
+export const fetchFunFactsAsync = createAsyncThunk('movieList/fetchMovieList', async () => {
   const response = await fetchMovieList();
   return response;
 });

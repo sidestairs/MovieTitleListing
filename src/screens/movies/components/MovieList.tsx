@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import MovieCard from './MovieCard';
 import Grid from '@mui/material/Grid';
-import { useAppSelector, useAppDispatch } from 'redux/hook';
+import { useAppSelector } from 'redux/hook';
 import { selectMovieByCategory } from 'redux/slices/movieListSlice';
 import { MovieObject } from 'redux/slices/movieListSlice';
 import MovieDialog from './MovieDialog';
-import Button from '@mui/material/Button';
 import { useParams } from 'react-router-dom';
+
+interface MovieObjectWithFunFacts extends MovieObject {
+  funfactsIndex: String;
+}
 
 const MovieList = () => {
   const { category } = useParams();
   const [movieListing, setMovieListing] = useState<MovieObject[]>();
-  const [currentMovie, setCurrentMovie] = useState<MovieObject>();
+  const [currentMovie, setCurrentMovie] = useState<MovieObjectWithFunFacts>();
   const [openMovieDialog, setOpenMovieDialog] = React.useState(false);
   const movieByCategory = useAppSelector(selectMovieByCategory);
-  const dispatch = useAppDispatch();
-
-  console.log('category', category);
 
   useEffect(() => {
     const movies = movieByCategory(category);
@@ -27,7 +27,7 @@ const MovieList = () => {
     setOpenMovieDialog(false);
   };
 
-  const handleMovieDialogOpen = (entry: MovieObject) => {
+  const handleMovieDialogOpen = (entry: MovieObjectWithFunFacts) => {
     setCurrentMovie(entry);
     setOpenMovieDialog(true);
   };
@@ -40,7 +40,10 @@ const MovieList = () => {
           movieListing.map((entry, index) => {
             return (
               <Grid key={index} item xl>
-                <MovieCard {...entry} onClick={() => handleMovieDialogOpen(entry)} />
+                <MovieCard
+                  {...entry}
+                  onClick={() => handleMovieDialogOpen({ ...entry, funfactsIndex: index.toString() })}
+                />
               </Grid>
             );
           })}

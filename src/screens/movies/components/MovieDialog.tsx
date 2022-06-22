@@ -1,15 +1,16 @@
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import CardMediaExtended from 'shared/CardMediaExtended';
 import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
+import Skeleton from '@mui/material/Skeleton';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
 import { MovieObject } from 'redux/slices/movieListSlice';
-import CardMedia from '@mui/material/CardMedia';
+import { useGetFunFactsByIdQuery } from 'redux/services/funFacts';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -50,13 +51,31 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
   );
 };
 
+interface MovieObjectWithFunFacts extends MovieObject {
+  funfactsIndex: String;
+}
+
 interface IProps {
   open: boolean;
   handleClose: () => void;
-  currentMovie: MovieObject | undefined;
+  currentMovie: MovieObjectWithFunFacts | undefined;
 }
 
 export default function MovieDialog({ open, handleClose, currentMovie }: IProps) {
+  const funfacts = currentMovie?.funFacts;
+  const funfactsIndex = currentMovie?.funfactsIndex ?? '';
+  // let data: String | undefined;
+  // let error: Boolean | undefined;
+  // let isLoading: Boolean | undefined;
+
+  const { data, error, isLoading } = useGetFunFactsByIdQuery(funfactsIndex);
+
+  // useEffect(() => {}, [isLoading]);
+
+  // console.log('funfacts', funfacts);
+  // if (!funfacts) {
+  // }
+
   return (
     <div>
       <BootstrapDialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
@@ -71,12 +90,16 @@ export default function MovieDialog({ open, handleClose, currentMovie }: IProps)
                 title={`${currentMovie?.title}`}
                 mediaHeight={200}
               />
-              <Typography gutterBottom my={2}>
-                {currentMovie?.description}
+              <Typography my={2}>{currentMovie?.description}</Typography>
+
+              <Typography variant="h6">Fun Facts:</Typography>
+              <Typography my={2}>
+                {isLoading ? <Skeleton variant="text" animation="wave" /> : <>{data?.text}</>}
+                {error && <>Error loading fun facts.</>}
               </Typography>
             </DialogContent>
             <DialogActions>
-              <Typography gutterBottom mx={2} my={1}>{`Release Year: ${currentMovie?.releaseYear}`}</Typography>
+              <Typography mx={2} my={1}>{`Release Year: ${currentMovie?.releaseYear}`}</Typography>
             </DialogActions>
           </>
         )}
