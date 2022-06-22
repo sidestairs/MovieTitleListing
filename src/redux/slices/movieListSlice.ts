@@ -34,10 +34,10 @@ export const fetchMovieListAsync = createAsyncThunk('movieList/fetchMovieList', 
   return response;
 });
 
-export const fetchFunFactsAsync = createAsyncThunk('movieList/fetchMovieList', async () => {
-  const response = await fetchMovieList();
-  return response;
-});
+// export const fetchFunFactsAsync = createAsyncThunk('movieList/fetchMovieList', async () => {
+//   const response = await fetchMovieList();
+//   return response;
+// });
 
 export const movieListSlice = createSlice({
   name: 'movieList',
