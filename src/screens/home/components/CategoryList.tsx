@@ -9,10 +9,10 @@ export default function CategoryList() {
 
   return (
     <React.Fragment>
-      <Grid container spacing={2}>
+      <Grid container spacing={2} md>
         {movieCategories.map((category, index) => {
           return (
-            <Grid key={index} item xl>
+            <Grid key={index} item>
               <CategoryCard category={category} />
             </Grid>
           );

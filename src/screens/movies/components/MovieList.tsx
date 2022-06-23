@@ -26,6 +26,7 @@ const MovieList = () => {
   useEffect(() => {
     const movies = movieByCategory(category);
     setMovieListing(movies);
+    // eslint-disable-next-line
   }, [category]);
 
   const handleMovieDialogClose = () => {
